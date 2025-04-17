@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waterborne Disease Predictor</title>
+    <style>
+        body {
+            background: #f4f8fb;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        h2 {
+            text-align: center;
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <h1>Waterborne Disease Prediction</h1>
+        {% csrf_token %}
+        <label>Symptoms:</label>
+        <input type="text" name="symptoms" required>
+
+        <label>Heart Rate:</label>
+        <input type="number" name="heart_rate" step="0.1" required>
+
+        <label>Blood Pressure Systolic:</label>
+        <input type="number" name="blood_pressure_systolic" step="0.1" required>
+
+        <label>Blood Pressure Diastolic:</label>
+        <input type="number" name="blood_pressure_diastolic" step="0.1" required>
+
+        <label>Fever (1 for Yes / 0 for No):</label>
+        <input type="number" name="fever" step="1" min="0" max="1" required>
+
+        <label>Body Temperature (°C):</label>
+        <input type="number" name="body_temperature" step="0.1" required>
+
+        <label>Duration of Infection (in days):</label>
+        <input type="number" name="duration_of_infection" step="1" required>
+
+        <button type="submit">Predict</button>
+
+        {% if prediction is not None %}
+            <h2>Prediction: {{ prediction }}</h2>
+        {% endif %}
+    </form>
+</body>
+</html>
